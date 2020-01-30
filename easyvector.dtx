@@ -1,0 +1,389 @@
+%	\iffalse meta-comment
+%
+%	Copyright (C) 2020 by Brian W. Mulligan <bwmulligan@astronaos.com>
+% -----------------------------------------------------------
+%
+% This file may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, either version 1.3c of this license
+% or (at your option) any later version. The latest version of this
+% license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2006/05/20 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{easyvector.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+%<package>\ProvidesPackage{easyvector}
+%<*package>
+	[2020/01/29 v1.0.0 easyvector package]
+%</package>
+%<package>\makeatletter
+%<package>\DeclareOption{braket}{\def\@nicevectOptionBraket{1}}
+%<package>\DeclareOption{brace}{\def\@nicevectOptionBrace{1}}
+%<package>\DeclareOption{paren}{\def\@nicevectOptionParen{1}}
+%<package>\DeclareOption{sqbracket}{\def\@nicevectOptionBracket{1}}
+%<package>\DeclareOption{bmatrix}{\def\@nicevectOptionbMatrix{1}}
+%<package>\DeclareOption{pmatrix}{\def\@nicevectOptionpMatrix{1}}
+%<package>\DeclareOption{vmatrix}{\def\@nicevectOptionbMatrix{1}}
+%<package>\DeclareOption{Bmatrix}{\def\@nicevectOptionBMatrix{1}}
+%<package>\DeclareOption{Vmatrix}{\def\@nicevectOptionVMatrix{1}}
+%<package>\ProcessOptions\relax
+%<package>\RequirePackage{amsmath}
+
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{easyvector}
+\usepackage[backref]{hyperref}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+%\OnlyDescription
+\begin{document}
+\DocInput{easyvector.dtx}
+\PrintChanges
+\PrintIndex
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{486}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{v1.0.0}{2020/01/29}{Initial version}
+%
+% \GetFileInfo{easyvector.dtx}
+% \DeclareRobustCommand{\fileversion}{v1.0}
+% \DeclareRobustCommand{\filedate}{2020/01/29}
+%
+% \DoNotIndex{\DeclareRobustCommand,\newenvironment,\DeclareRobustCommand,
+%  \left,\right,\textbf,\mathrm,\ensuremath,\units@separator,\expandafter,\,}
+%
+% \title{The \textsf{easyvector} package\thanks{This document corresponds to%
+%  \textsf{easyvector}~\fileversion, dated \filedate.}}
+% \author{Brian W. Mulligan \\ \texttt{bwmulligan@astronaos.com}}
+%
+% \maketitle
+% \setlength{\parindent}{0em}
+% \setlength{\parskip}{1em}
+%
+% \section{Introduction}
+%
+%
+% This package provides an easy way to declare a series of values to be a
+% vector and print those values in a user determined way. This is intended for
+% use in any document that requires printing vector values / components.
+%
+%
+% \section{Vector appearance}
+% 
+% There are several styles that the vector may be displayed as:
+% \begin{itemize}
+% \item |braket| The vector will be horizontal and have braket-like notation, 
+% appearing as $\left\langle 1,\,2,\,3 \right\rangle$
+% \item |parens| The vector will be horizontal and have parenthises as the
+% delimiter, appearing as $\left( 1,\,2,\,3 \right)$
+% \item |brace| The vector will be horizontal and have parenthises as the
+% delimiter, appearing as $\left\{ 1,\,2,\,3 \right\}$
+% \item |sqbracket| The vector will be horizontal and have parenthises as the
+% delimiter, appearing as $\left[ 1,\,2,\,3 \right]$
+% \item |pmatrix| The vector will be vertical and have parenthises as the
+% delimiter, appearing as $\begin{pmatrix} 1\\2\\3 \end{pmatrix}$
+% \item |bmatrix| The vector will be vertical and have square brackets as the
+% delimiter, appearing as $\begin{bmatrix} 1\\2\\3 \end{bmatrix}$
+% \item |vmatrix| The vector will be vertical and have vertical bars as the
+% delimiter, appearing as $\begin{vmatrix} 1\\2\\3 \end{vmatrix}$
+% \item |Bmatrix| The vector will be vertical and have double square brackets as 
+% the delimiter, appearing as $\begin{Bmatrix} 1\\2\\3 \end{Bmatrix}$
+% \item |Vmatrix| The vector will be vertical and have double vertical bars as
+% the delimiter, appearing as $\begin{Vmatrix} 1\\2\\3 \end{Vmatrix}$
+% \end{itemize}
+% The default style is |pmatrix|.
+%
+% \section{Macro Usage}
+%
+% \DescribeMacro{\easyvector}
+% \index{\easyvector|usage}
+% |\easyvector| is a macro to create a vector containing one or more components.
+% Each component is included via \{\marg{value}\}. It is unlimited in the 
+% maximum rank. 
+% Example:|\easyvector{1}{2}{3}| will be displayed as 
+% $\left\langle 1,\,2,\,3\right\rangle$
+% (with the |braket| option). |\easyvector{1}{2}{3}{4}| would be 
+% $\left\langle 1,\,2,\,3,\,4\right\rangle$
+%
+% \StopEventually{}
+%
+% \section{Implementation}
+% 
+%\iffalse
+%<*package>
+%\fi
+%\begin{macro}{Options}
+% Processing for the package options
+% \begin{macro}{default}
+% The default style is |pmatrix|. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The environment will be pmatrix.
+%    \begin{macrocode}
+\def\@easyvectorenvtypebegin{\begin{pmatrix}}
+\def\@easyvectorenvtypeend{\end{pmatrix}}
+%    \end{macrocode}
+% |pmatrix| requires |\\| to render the component vertically.
+%    \begin{macrocode}
+\def\@easyvectorsep{\\}
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{braket}
+% The |braket| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The starting and ending delimiter are |\langle...\rangle|
+%    \begin{macrocode}
+\ifx\@nicevectOptionBraket\undefined
+\else
+\def\@easyvectorenvtypebegin{\left\langle}
+\def\@easyvectorenvtypeend{\right\rangle}
+%    \end{macrocode}
+% Use a comma with a partial space between components.
+%    \begin{macrocode}
+\def\@easyvectorsep{,\,}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{brace}
+% The |brace| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The starting and ending delimiter are |\{...\}|
+%    \begin{macrocode}
+\ifx\@nicevectOptionBrace\undefined
+\else
+\def\@easyvectorenvtypebegin{\left\{}
+\def\@easyvectorenvtypeend{\right\}}
+%    \end{macrocode}
+% Use a comma with a partial space between components.
+%    \begin{macrocode}
+\def\@easyvectorsep{,\,}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{paren}
+% The |paren| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The starting and ending delimiter are |(...)|
+%    \begin{macrocode}
+\ifx\@nicevectOptionParen\undefined
+\else
+\def\@easyvectorenvtypebegin{\left(}
+\def\@easyvectorenvtypeend{\right)}
+%    \end{macrocode}
+% Use a comma with a partial space between components.
+%    \begin{macrocode}
+\def\@easyvectorsep{,\,}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{sqbracket}
+% The |paren| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The starting and ending delimiter are |[...]|
+%    \begin{macrocode}
+\ifx\@nicevectOptionBracket\undefined
+\else
+\def\@easyvectorenvtypebegin{\left[}
+\def\@easyvectorenvtypeend{\right]}
+%    \end{macrocode}
+% Use a comma with a partial space between components.
+%    \begin{macrocode}
+\def\@easyvectorsep{,\,}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{bmatrix}
+% The |bmatrix| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The environment will be |bmatrix|.
+%    \begin{macrocode}
+\ifx\@nicevectOptionbMatrix\undefined
+\else
+\def\@easyvectorenvtypebegin{\begin{bmatrix}}
+\def\@easyvectorenvtypeend{\end{bmatrix}}
+%    \end{macrocode}
+% |bmatrix| requires |\\| to render the component vertically.
+%    \begin{macrocode}
+\def\@easyvectorsep{\\}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{vmatrix}
+% The |vmatrix| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The environment will be |vmatrix|.
+%    \begin{macrocode}
+\ifx\@nicevectOptionvMatrix\undefined
+\else
+\def\@easyvectorenvtypebegin{\begin{vmatrix}}
+\def\@easyvectorenvtypeend{\end{vmatrix}}
+%    \end{macrocode}
+% |bmatrix| requires |\\| to render the component vertically.
+%    \begin{macrocode}
+\def\@easyvectorsep{\\}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{Bmatrix}
+% The |Bmatrix| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The environment will be |Bmatrix|.
+%    \begin{macrocode}
+\ifx\@nicevectOptionBMatrix\undefined
+\else
+\def\@easyvectorenvtypebegin{\begin{Bmatrix}}
+\def\@easyvectorenvtypeend{\end{Bmatrix}}
+%    \end{macrocode}
+% |Bmatrix| requires |\\| to render the component vertically.
+%    \begin{macrocode}
+\def\@easyvectorsep{\\}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%
+% \begin{macro}{Vmatrix}
+% The |Vmatrix| style. Set the internally used |\defs| for the
+% begin and end of the vector and the internal separator.
+%
+% The environment will be |Vmatrix|.
+%    \begin{macrocode}
+\ifx\@nicevectOptionVMatrix\undefined
+\else
+\def\@easyvectorenvtypebegin{\begin{Vmatrix}}
+\def\@easyvectorenvtypeend{\end{Vmatrix}}
+%    \end{macrocode}
+% |Vmatrix| requires |\\| to render the component vertically.
+%    \begin{macrocode}
+\def\@easyvectorsep{\\}
+\fi
+%    \end{macrocode}
+%\end{macro}
+%\end{macro}
+%\iffalse
+%</package>
+%\fi
+%
+%\iffalse
+%<*package>
+%\fi
+%\begin{environment}{easyvectorenv}
+% Declare an environment for displaying the vector.
+%    \begin{macrocode}
+\newenvironment{easyvectorenv}%
+{%
+%    \end{macrocode}
+% Figure out if we are in math mode
+%    \begin{macrocode}
+\ifmmode{%
+\global\def\@myvectmath{1}%
+}%
+\else{%
+\global\def\@myvectmath{0}%
+}%
+\fi%
+%    \end{macrocode}
+% If we are not, start the math environment
+%    \begin{macrocode}
+\if\@myvectmath0%
+\begin{math}%
+\fi
+%    \end{macrocode}
+% Place the starting delimiter for the vector, or start the matrix environment
+%    \begin{macrocode}
+\@easyvectorenvtypebegin%
+}%
+{%
+%    \end{macrocode}
+% Place the ending delimiter for the vector, or end the matrix environment
+%    \begin{macrocode}
+\@easyvectorenvtypeend%
+%    \end{macrocode}
+% If we didn't start in math mode, exit the math environment
+%    \begin{macrocode}
+\if\@myvectmath0%
+\end{math}%
+\fi
+}
+%    \end{macrocode}
+%\end{environment}
+%\iffalse
+%</package>
+%\fi
+%\iffalse
+%<*package>
+%\fi
+%\begin{macro}{\@vect@next}
+% Worker macro that processes each component and adds it to the vector
+%    \begin{macrocode}
+\newcommand{\@vect@next}[1]{\@ifnextchar\bgroup{%
+\@easyvectorsep #1 \@vect@next}{\@easyvectorsep #1\end{easyvectorenv}}}
+%    \end{macrocode}
+%\end{macro}
+%\iffalse
+%</package>
+%\fi
+%\iffalse
+%<*package>
+%\fi
+%\begin{macro}{\easyvector}
+% Primary macro that begins processing the components and stars the 
+% vector environment
+%    \begin{macrocode}
+\newcommand{\easyvector}[1]{\begin{easyvectorenv}%
+\@ifnextchar\bgroup{ #1 \@vect@next}{#1 \end{easyvectorenv}}}
+%    \end{macrocode}
+%\end{macro}
+%\iffalse
+%</package>
+%\fi
+%\iffalse
+%<*package>
+%\fi
+\makeatother
+%\iffalse
+%</package>
+%\fi
+
+%Finale
